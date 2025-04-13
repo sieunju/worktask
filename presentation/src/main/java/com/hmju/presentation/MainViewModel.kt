@@ -12,6 +12,7 @@ import com.hmju.presentation.util.UiMapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -54,6 +55,7 @@ class MainViewModel @Inject constructor(
             }
 
             is MainSectionState.Content -> {
+                Timber.d("Contents ${newState.list.map { it.id }}")
                 _uiList.addAll(newState.list.map { it.toUi() })
                 params.pageNo++
                 pagingModel.isLoading = false
