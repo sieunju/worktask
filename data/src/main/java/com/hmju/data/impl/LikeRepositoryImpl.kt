@@ -10,13 +10,13 @@ internal class LikeRepositoryImpl @Inject constructor(
     private val prefManager: PreferenceManager
 ) : LikeRepository {
 
-    override suspend fun fetchIds(): List<Long> {
+    override suspend fun fetchIds(): List<Int> {
         val str = prefManager.getString(KEY_PRODUCT_LIKE)
         if (str.isEmpty()) return listOf()
-        return str.split(",").mapNotNull { it.toLongOrNull() }
+        return str.split(",").mapNotNull { it.toIntOrNull() }
     }
 
-    override suspend fun add(id: Long): Boolean {
+    override suspend fun add(id: Int): Boolean {
         val ids = fetchIds().toMutableList()
         if (ids.contains(id)) {
             ids.remove(id)
@@ -32,7 +32,7 @@ internal class LikeRepositoryImpl @Inject constructor(
         return true
     }
 
-    override suspend fun remove(id: Long): Boolean {
+    override suspend fun remove(id: Int): Boolean {
         val ids = fetchIds().toMutableList()
         ids.remove(id)
         prefManager.setString(KEY_PRODUCT_LIKE, ids.joinToString(","))
