@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="txt_sold_out">Coming Soon</string>
+    <string name="fmt_price_rate">%d%%</string>
+    <string name="fmt_price">%,d원</string>
+
+</resources>

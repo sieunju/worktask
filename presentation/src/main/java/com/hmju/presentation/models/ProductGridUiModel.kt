@@ -1,0 +1,36 @@
+package com.hmju.presentation.models
+
+import com.hmju.domain.models.ProductData
+import com.hmju.presentation.R
+
+/**
+ * Description :
+ *
+ * Created by juhongmin on 2025. 4. 13.
+ */
+data class ProductGridUiModel(
+    val id: Long,
+    val name: String,
+    val imageUrl: String,
+    val price: Int,
+    val discountRate: Int,
+    val discountPrice: Int? = null,
+    val isSoldOut: Boolean,
+    val isDiscount: Boolean,
+    var isLike: Boolean = false
+) : BaseUiModel(R.layout.vh_product_grid_type) {
+
+    constructor(
+        data: ProductData
+    ) : this(
+        id = data.id,
+        name = data.name,
+        imageUrl = data.imageUrl,
+        price = data.price,
+        discountRate = data.discountRate,
+        discountPrice = data.discountPrice,
+        isSoldOut = data.isSoldOut,
+        isDiscount = data.isDiscount,
+        isLike = false
+    )
+}

@@ -8,6 +8,7 @@ import com.hmju.domain.enums.ProductViewType
  * Created by juhongmin on 2025. 4. 13.
  */
 data class SectionWithProductData(
+    val id: Int,
     val title: String,
     val productType: ProductViewType,
     val list: List<ProductData> = listOf()
@@ -16,6 +17,7 @@ data class SectionWithProductData(
         section: SectionData,
         list: List<ProductData>
     ) : this(
+        id = section.id,
         title = section.title,
         productType = section.productType,
         list = list
