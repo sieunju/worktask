@@ -56,8 +56,8 @@ internal object NetworkModule {
         @HttpLogInterceptor logInterceptor: Interceptor
     ) : OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(mockInterceptor)
             .addInterceptor(logInterceptor)
+            .addInterceptor(mockInterceptor)
             .build()
     }
 
