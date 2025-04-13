@@ -54,7 +54,7 @@ internal object NetworkModule {
     fun provideHttpClient(
         @HttpMockInterceptor mockInterceptor: Interceptor,
         @HttpLogInterceptor logInterceptor: Interceptor
-    ) : OkHttpClient {
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logInterceptor)
             .addInterceptor(mockInterceptor)
@@ -67,7 +67,7 @@ internal object NetworkModule {
         @ApplicationContext context: Context,
         httpClient: OkHttpClient,
         json: Json
-    ) : Retrofit {
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(context.getString(R.string.base_url))
             .client(httpClient)

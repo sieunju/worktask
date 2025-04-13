@@ -1,32 +1,31 @@
-package com.hmju.data.repository
+package com.hmju.presentation.usecase
 
-import com.hmju.domain.repository.LikeRepository
-import com.hmju.domain.repository.ProductRepository
+import com.hmju.domain.params.SectionParams
+import com.hmju.domain.usecase.MainSectionUseCase
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.time.measureTime
 
 /**
- * Description : LikeRepository Test
+ * Description :
  *
  * Created by juhongmin on 2025. 4. 13.
  */
 @HiltAndroidTest
-class LikeRepositoryTest {
+internal class MainUseCaseTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var repository: LikeRepository
-
-    @Inject
-    lateinit var productRepository: ProductRepository
+    lateinit var usecase: MainSectionUseCase
 
     @Before
     fun init() {
@@ -40,14 +39,14 @@ class LikeRepositoryTest {
     }
 
     @Test
-    fun test_max_length() {
+    fun test_main_usecase() {
+        val params = SectionParams()
         runBlocking {
-            val range = 5063110..(5063110 + 5000)
-            for (idx in range) {
-                repository.add(idx)
-            }
-            val list = repository.fetchIds()
-            assert(range.count() > list.size)
+            measureTime {
+                usecase(params).collectLatest {
+                    Timber.d("State:${it}")
+                }
+            }.also { Timber.d("TakeTime:${it}") }
         }
     }
 }
