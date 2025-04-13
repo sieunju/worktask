@@ -9,7 +9,7 @@ data class SectionEntity(
     @SerialName("title")
     val title: String = "",
     @SerialName("id")
-    val id: Long = 0,
+    val id: Int = 0,
     @SerialName("type")
     val type: String = "",
     @SerialName("url")
