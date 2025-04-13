@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.timber)
     implementation(libs.glide)
+    implementation(libs.coroutine.android)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     testImplementation(libs.junit)
     androidTestImplementation(project(":domain"))
