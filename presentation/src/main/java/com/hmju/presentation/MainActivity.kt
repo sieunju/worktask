@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.hmju.presentation.databinding.AMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +26,12 @@ class MainActivity : AppCompatActivity() {
             R.layout.a_main
         ).apply {
             lifecycleOwner = this@MainActivity
+            reqManager = Glide.with(this@MainActivity)
             vm = viewModel
+        }
+
+        with(viewModel) {
+            start()
         }
     }
 }
