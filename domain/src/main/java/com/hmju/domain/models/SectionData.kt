@@ -5,6 +5,5 @@ import com.hmju.domain.enums.ProductViewType
 data class SectionData(
     val title: String,
     val id: Long,
-    val productType: ProductViewType,
-    val isNextPage: Boolean
+    val productType: ProductViewType
 )

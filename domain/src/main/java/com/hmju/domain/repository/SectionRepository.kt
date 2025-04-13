@@ -1,6 +1,6 @@
 package com.hmju.domain.repository
 
-import com.hmju.domain.models.SectionData
+import com.hmju.domain.models.SectionResponse
 import com.hmju.domain.params.SectionParams
 
 /**
@@ -13,5 +13,5 @@ interface SectionRepository {
      * 섹션 조회
      * @param params 섹션 QueryParams
      */
-    suspend fun fetch(params: SectionParams): Result<SectionData>
+    suspend fun fetch(params: SectionParams): Result<SectionResponse>
 }
