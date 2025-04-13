@@ -21,4 +21,8 @@ internal class PreferenceManagerImpl(
     override fun getString(key: String): String {
         return pref.getString(key, "") ?: ""
     }
+
+    override fun removeKey(key: String) {
+        pref.edit { removeKey(key) }
+    }
 }
