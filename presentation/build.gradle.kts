@@ -46,8 +46,12 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.swipe.refresh)
     implementation(libs.material)
     implementation(libs.timber)
+    implementation(libs.glide)
 
     testImplementation(libs.junit)
     androidTestImplementation(project(":domain"))
