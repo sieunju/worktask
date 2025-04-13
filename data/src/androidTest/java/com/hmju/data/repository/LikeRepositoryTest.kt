@@ -5,7 +5,6 @@ import com.hmju.domain.repository.ProductRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -45,7 +44,7 @@ class LikeRepositoryTest {
         runBlocking {
             val range = 5063110..(5063110 + 5000)
             for (idx in range) {
-                repository.add(idx.toLong())
+                repository.add(idx)
             }
             val list = repository.fetchIds()
             assert(range.count() > list.size)
