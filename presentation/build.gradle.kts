@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.timber)
     implementation(libs.glide)
+    implementation(libs.coroutine.android)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     testImplementation(libs.junit)
     androidTestImplementation(project(":domain"))

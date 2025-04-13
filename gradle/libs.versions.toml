@@ -20,6 +20,7 @@ recyclerView = "1.4.0"
 kotlinxSerializationJson = "1.8.0"
 javax = "1"
 swipeRefresh = "1.1.0"
+androidXLifecycle = "2.8.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +28,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidXLifecycle" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerView" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
