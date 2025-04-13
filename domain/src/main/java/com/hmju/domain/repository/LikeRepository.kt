@@ -9,4 +9,5 @@ interface LikeRepository {
     suspend fun fetchIds(): List<Long>
     suspend fun add(id: Long): Boolean
     suspend fun remove(id: Long): Boolean
+    suspend fun clear()
 }

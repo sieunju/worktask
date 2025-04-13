@@ -38,4 +38,8 @@ internal class LikeRepositoryImpl @Inject constructor(
         prefManager.setString(KEY_PRODUCT_LIKE, ids.joinToString(","))
         return true
     }
+
+    override suspend fun clear() {
+        prefManager.removeKey(KEY_PRODUCT_LIKE)
+    }
 }
