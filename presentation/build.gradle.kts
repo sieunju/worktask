@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdk = 26
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.hmju.presentation.PresentationHiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -50,6 +50,12 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(libs.junit)
+    androidTestImplementation(project(":domain"))
+    androidTestImplementation(project(":data"))
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.coroutine.android)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.hilt.android)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
 }
