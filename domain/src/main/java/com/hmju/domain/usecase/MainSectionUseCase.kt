@@ -13,6 +13,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -49,7 +50,7 @@ class MainSectionUseCase @Inject constructor(
                 }
             }
             emit(state)
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     private suspend fun reqSectionWithProduct(

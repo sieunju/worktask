@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.hmju.domain.models.MainSectionState
 import com.hmju.presentation.databinding.AMainBinding
+import com.hmju.presentation.decorations.VerticalLineDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             reqManager = Glide.with(this@MainActivity)
             vm = viewModel
+            rvContents.addItemDecoration(VerticalLineDecoration(this@MainActivity))
         }
 
         with(viewModel) {
