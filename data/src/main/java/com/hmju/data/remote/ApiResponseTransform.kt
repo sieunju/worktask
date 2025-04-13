@@ -9,7 +9,7 @@ internal inline fun <reified I, reified O> Response<ApiPagedListResponse<I>>.tra
     predicate: (ApiPagedListResponse<I>) -> O
 ): Result<O> {
     if (isSuccessful) {
-        val body = body() ?: return Result.failure(Throwable("Invalidate Cast Exception"))
+        val body = body() ?: return Result.failure(Exception("Invalidate Cast Exception"))
         try {
             val data = predicate(body)
             return Result.success(data)
@@ -17,7 +17,7 @@ internal inline fun <reified I, reified O> Response<ApiPagedListResponse<I>>.tra
             return Result.failure(ex)
         }
     }
-    return Result.failure(Throwable(message()))
+    return Result.failure(Exception(message()))
 }
 
 @JvmName("transformResponse_listType")
@@ -25,7 +25,7 @@ internal inline fun <reified I, reified O> Response<ApiListResponse<I>>.transfor
     predicate: (ApiListResponse<I>) -> O
 ): Result<O> {
     if (isSuccessful) {
-        val body = body() ?: return Result.failure(Throwable("Invalidate Cast Exception"))
+        val body = body() ?: return Result.failure(Exception("Invalidate Cast Exception"))
         try {
             val data = predicate(body)
             return Result.success(data)
@@ -33,5 +33,5 @@ internal inline fun <reified I, reified O> Response<ApiListResponse<I>>.transfor
             return Result.failure(ex)
         }
     }
-    return Result.failure(Throwable(message()))
+    return Result.failure(Exception(message()))
 }

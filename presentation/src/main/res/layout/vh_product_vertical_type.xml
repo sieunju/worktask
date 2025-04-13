@@ -66,6 +66,7 @@
             tools:text="상품 이름 제목 2줄 이후 말줄임 입니다." />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
@@ -105,6 +106,12 @@
                 tools:visibility="visible" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llPrice" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

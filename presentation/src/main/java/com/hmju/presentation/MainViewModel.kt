@@ -1,5 +1,7 @@
 package com.hmju.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmju.domain.models.MainSectionState
@@ -10,9 +12,9 @@ import com.hmju.presentation.models.PagingModel
 import com.hmju.presentation.util.ListLiveData
 import com.hmju.presentation.util.UiMapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -25,23 +27,29 @@ class MainViewModel @Inject constructor(
     private val useCase: MainSectionUseCase
 ) : ViewModel() {
 
+    private val _uiState: MutableLiveData<MainSectionState> by lazy { MutableLiveData() }
+    val uiState: LiveData<MainSectionState> get() = _uiState
     private val params: SectionParams by lazy { SectionParams() }
     val pagingModel: PagingModel by lazy { PagingModel() }
     private val _uiList: ListLiveData<BaseUiModel> by lazy { ListLiveData() }
     val uiList: ListLiveData<BaseUiModel> get() = _uiList
+    private var job: Job? = null
 
     fun start() {
         _uiList.clear()
         params.pageNo = 1
         pagingModel.initParams()
-        useCase(params)
-            .onEach { handleUiState(it) }
-            .launchIn(viewModelScope)
+        reqData()
     }
 
     fun onLoadPage() {
         pagingModel.isLoading = true
-        useCase(params)
+        reqData()
+    }
+
+    private fun reqData() {
+        job?.cancel()
+        job = useCase(params)
             .onEach { handleUiState(it) }
             .launchIn(viewModelScope)
     }
@@ -49,13 +57,10 @@ class MainViewModel @Inject constructor(
     private fun handleUiState(
         newState: MainSectionState
     ) {
+        _uiState.value = newState
         when (newState) {
-            is MainSectionState.Loading -> {
-
-            }
 
             is MainSectionState.Content -> {
-                Timber.d("Contents ${newState.list.map { it.id }}")
                 _uiList.addAll(newState.list.map { it.toUi() })
                 params.pageNo++
                 pagingModel.isLoading = false
@@ -65,6 +70,8 @@ class MainViewModel @Inject constructor(
             is MainSectionState.Error -> {
 
             }
+
+            else -> Unit
         }
     }
 }

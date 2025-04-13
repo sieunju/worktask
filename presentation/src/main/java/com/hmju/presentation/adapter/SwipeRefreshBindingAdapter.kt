@@ -2,6 +2,7 @@ package com.hmju.presentation.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import timber.log.Timber
 
 object SwipeRefreshBindingAdapter {
 

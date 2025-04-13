@@ -2,9 +2,11 @@ package com.hmju.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.hmju.domain.models.MainSectionState
 import com.hmju.presentation.databinding.AMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +33,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(viewModel) {
+            uiState.observe(this@MainActivity) {
+                if (it is MainSectionState.Error) {
+                    showErrorDialog(it)
+                }
+            }
             start()
         }
+    }
+
+    private fun showErrorDialog(state: MainSectionState.Error) {
+        AlertDialog.Builder(this)
+            .setMessage(state.message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.txt_confirm, { _, _ ->
+                viewModel.start()
+            })
+            .show()
+
     }
 }
