@@ -15,7 +15,8 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:onRefresh="@{()->vm.start()}">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -27,6 +28,8 @@
             android:splitMotionEvents="false"
             app:dataList="@{vm.uiList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:onLoadNextPage="@{()-> vm.onLoadPage()}"
+            app:pagingModel="@{vm.pagingModel}"
             app:reqManager="@{reqManager}"
             app:viewModel="@{vm}" />
 

@@ -3,7 +3,6 @@ package com.hmju.presentation.adapter
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.util.TypedValue
-import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -11,9 +10,6 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.hmju.presentation.R
 import com.hmju.presentation.models.BaseUiModel
 
@@ -24,13 +20,6 @@ import com.hmju.presentation.models.BaseUiModel
  */
 object BindingAdapter {
 
-    private val crossFadeFactory: DrawableCrossFadeFactory by lazy {
-        DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
-    }
-
-    private val crossFadeTransition: DrawableTransitionOptions by lazy {
-        DrawableTransitionOptions.withCrossFade(crossFadeFactory)
-    }
 
     @JvmStatic
     @BindingAdapter(
@@ -56,28 +45,6 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter(
-        value = ["reqManager", "imageUrl"],
-        requireAll = false
-    )
-    fun bindImageLoad(
-        iv: AppCompatImageView,
-        reqManager: RequestManager?,
-        imageUrl: String? = null
-    ) {
-        if (imageUrl.isNullOrEmpty()) {
-            iv.visibility = View.INVISIBLE
-            return
-        }
-        if (reqManager == null) return
-        reqManager
-            .load(imageUrl)
-            .transition(crossFadeTransition)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(iv)
-    }
-
-    @JvmStatic
-    @BindingAdapter(
         value = ["price", "discountPrice"],
         requireAll = false
     )
@@ -92,12 +59,12 @@ object BindingAdapter {
             tv.paintFlags = tv.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             tv.setTypeface(null, Typeface.NORMAL)
             tv.setTextColor(ContextCompat.getColor(tv.context, R.color.grey))
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,12f)
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
         } else {
             tv.paintFlags = tv.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             tv.setTypeface(null, Typeface.BOLD)
             tv.setTextColor(ContextCompat.getColor(tv.context, R.color.black))
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,14f)
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
         }
     }
 
