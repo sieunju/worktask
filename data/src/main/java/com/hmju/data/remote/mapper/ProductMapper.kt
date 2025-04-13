@@ -2,6 +2,7 @@ package com.hmju.data.remote.mapper
 
 import com.hmju.data.remote.entity.ProductEntity
 import com.hmju.domain.models.ProductData
+import kotlin.math.roundToInt
 
 /**
  * Description : Entity -> Data Model Mapper
@@ -10,6 +11,12 @@ import com.hmju.domain.models.ProductData
  */
 internal object ProductMapper {
 
+    private fun calculateDiscountRate(price: Int, discountPrice: Int): Int {
+        val amount = price - discountPrice
+        val rate = (amount.toFloat() / price.toFloat()) * 100
+        return rate.roundToInt()
+    }
+
     fun ProductEntity.toMap(): ProductData {
         return ProductData(
             id = id,
@@ -17,8 +24,8 @@ internal object ProductMapper {
             imageUrl = image,
             price = price,
             discountPrice = discountedPrice,
-            isSoldOut = isSoldOut,
-            isDiscount = discountedPrice != null
+            discountRate = discountedPrice?.let { calculateDiscountRate(price, it) } ?: 0,
+            isSoldOut = isSoldOut
         )
     }
 }

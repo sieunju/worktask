@@ -6,6 +6,8 @@ data class ProductData(
     val imageUrl: String,
     val price: Int,
     val discountPrice: Int? = null,
-    val isSoldOut: Boolean,
-    val isDiscount: Boolean
-)
+    val discountRate: Int,
+    val isSoldOut: Boolean
+) {
+    val isDiscount get() = discountRate > 0
+}
