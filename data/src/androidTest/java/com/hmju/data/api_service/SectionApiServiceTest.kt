@@ -38,16 +38,16 @@ internal class SectionApiServiceTest {
     @Test
     fun test_section() {
         runBlocking {
-            val res = apiService.fetchSelection(1)
+            val res = apiService.fetchSelections(1)
                 .transformResponse { it.list to it.meta }
             assert(res.isSuccess)
         }
     }
 
     @Test
-    fun test_section_error(){
+    fun test_section_error() {
         runBlocking {
-            val res = apiService.fetchSelection(0)
+            val res = apiService.fetchSelections(0)
                 .transformResponse { it.list to it.meta }
             assert(res.isFailure)
         }

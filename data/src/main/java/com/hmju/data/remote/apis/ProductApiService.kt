@@ -9,7 +9,7 @@ import retrofit2.http.Query
 internal interface ProductApiService {
 
     @GET("section/products")
-    suspend fun fetchProduct(
+    suspend fun fetchProducts(
         @Query("sectionId") id: Int
     ): Response<ApiListResponse<ProductEntity>>
 }

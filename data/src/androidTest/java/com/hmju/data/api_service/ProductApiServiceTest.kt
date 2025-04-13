@@ -34,7 +34,7 @@ internal class ProductApiServiceTest {
     @Test
     fun test_product() {
         runBlocking {
-            val res = apiService.fetchProduct(1)
+            val res = apiService.fetchProducts(1)
                 .transformResponse { it.list }
             assert(res.isSuccess)
         }
@@ -43,7 +43,7 @@ internal class ProductApiServiceTest {
     @Test
     fun test_product_error(){
         runBlocking {
-            val res = apiService.fetchProduct(0)
+            val res = apiService.fetchProducts(0)
                 .transformResponse { it.list }
             assert(res.isFailure)
         }

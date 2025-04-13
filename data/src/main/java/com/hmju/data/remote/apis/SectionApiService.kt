@@ -9,7 +9,7 @@ import retrofit2.http.Query
 internal interface SectionApiService {
 
     @GET("sections")
-    suspend fun fetchSelection(
+    suspend fun fetchSelections(
         @Query("page") pageNo: Int
     ): Response<ApiPagedListResponse<SectionEntity>>
 }
