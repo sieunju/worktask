@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:src="@drawable/selector_like"
-            app:isSelected="@{model.isLike}"
+            app:isLikeProduct="@{model.id}"
             app:layout_constraintRight_toRightOf="@+id/ivThumb"
             app:layout_constraintTop_toTopOf="@+id/ivThumb" />
 
@@ -109,8 +109,8 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:paddingTop="5dp"
+            android:textStyle="bold"
             android:visibility="@{model.isDiscount ? View.GONE : View.VISIBLE,default=visible}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvOriginPrice" />

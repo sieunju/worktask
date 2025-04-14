@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:src="@drawable/selector_like"
-            app:isSelected="@{model.isLike}"
+            app:isLikeProduct="@{model.id}"
             app:layout_constraintRight_toRightOf="@+id/ivThumb"
             app:layout_constraintTop_toTopOf="@+id/ivThumb" />
 

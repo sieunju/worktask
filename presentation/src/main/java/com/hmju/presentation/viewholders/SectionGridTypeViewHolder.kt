@@ -23,6 +23,7 @@ class SectionGridTypeViewHolder(
 ) {
     init {
         binding.reqManager = reqManager ?: Glide.with(itemView)
+        binding.vm = viewModel
     }
 
     override fun onBindView(model: Any) {

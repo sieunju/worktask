@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:src="@drawable/selector_like"
-            app:isSelected="@{model.isLike}"
+            app:isLikeProduct="@{model.id}"
             app:layout_constraintRight_toRightOf="@+id/ivThumb"
             app:layout_constraintTop_toTopOf="@+id/ivThumb" />
 
@@ -95,6 +95,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOriginPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="6dp"
@@ -104,6 +105,13 @@
             app:layout_constraintTop_toBottomOf="@+id/llDiscount"
             app:price="@{model.price}"
             tools:text="6,200원" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOriginPrice"
+            app:layout_goneMarginTop="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

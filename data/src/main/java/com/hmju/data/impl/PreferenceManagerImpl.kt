@@ -23,6 +23,6 @@ internal class PreferenceManagerImpl(
     }
 
     override fun removeKey(key: String) {
-        pref.edit { removeKey(key) }
+        pref.edit { remove(key) }
     }
 }

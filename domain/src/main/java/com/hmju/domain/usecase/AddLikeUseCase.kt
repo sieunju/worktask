@@ -1,6 +1,7 @@
 package com.hmju.domain.usecase
 
 import com.hmju.domain.repository.LikeRepository
+import com.hmju.domain.shared.LikeManager
 import javax.inject.Inject
 
 /**
@@ -12,6 +13,8 @@ class AddLikeUseCase @Inject constructor(
     private val repository: LikeRepository
 ) {
     suspend operator fun invoke(id: Int): Boolean {
-        return repository.add(id)
+        val result = repository.add(id)
+        LikeManager.add(id)
+        return result
     }
 }
