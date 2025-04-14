@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,20 +13,10 @@
             type="com.hmju.presentation.models.SectionHorizontalUiModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:text="@{model.title}"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="테스트 컬리 컬리" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContents"
@@ -37,15 +26,11 @@
             android:focusable="false"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingBottom="20dp"
             android:splitMotionEvents="false"
             app:dataList="@{model.uiList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:reqManager="@{reqManager}"
-            tools:itemCount="3"
-            tools:listitem="@layout/vh_product_horizontal_type" />
+            app:reqManager="@{reqManager}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>

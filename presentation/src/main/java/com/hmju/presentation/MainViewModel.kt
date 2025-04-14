@@ -10,7 +10,7 @@ import com.hmju.domain.usecase.MainSectionUseCase
 import com.hmju.presentation.models.BaseUiModel
 import com.hmju.presentation.models.PagingModel
 import com.hmju.presentation.util.ListLiveData
-import com.hmju.presentation.util.UiMapper.toUi
+import com.hmju.presentation.util.UiMapper.toUiModels
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -59,16 +59,11 @@ class MainViewModel @Inject constructor(
     ) {
         _uiState.value = newState
         when (newState) {
-
             is MainSectionState.Content -> {
-                _uiList.addAll(newState.list.map { it.toUi() })
+                _uiList.addAll(newState.list.map { it.toUiModels() }.flatten())
                 params.pageNo++
                 pagingModel.isLoading = false
                 pagingModel.isLast = !newState.hasNextPage
-            }
-
-            is MainSectionState.Error -> {
-
             }
 
             else -> Unit

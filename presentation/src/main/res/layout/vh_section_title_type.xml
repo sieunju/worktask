@@ -6,12 +6,8 @@
     <data>
 
         <variable
-            name="reqManager"
-            type="com.bumptech.glide.RequestManager" />
-
-        <variable
             name="model"
-            type="com.hmju.presentation.models.SectionVerticalUiModel" />
+            type="com.hmju.presentation.models.SectionTitleUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,22 +22,9 @@
             android:text="@{model.title}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="테스트 컬리 컬리" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:focusable="false"
-            android:paddingHorizontal="16dp"
-            android:splitMotionEvents="false"
-            app:dataList="@{model.uiList}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:reqManager="@{reqManager}"
-            tools:itemCount="3"
-            tools:listitem="@layout/vh_product_horizontal_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

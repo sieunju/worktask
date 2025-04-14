@@ -8,10 +8,11 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hmju.presentation.R
+import timber.log.Timber
 
 class VerticalLineDecoration(
     context: Context
-) : RecyclerView.ItemDecoration(){
+) : RecyclerView.ItemDecoration() {
 
     private val paint = Paint().apply {
         color = ContextCompat.getColor(context, R.color.grey)
@@ -43,9 +44,24 @@ class VerticalLineDecoration(
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
 
+
         for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(child)
+            val viewType = parent.adapter?.getItemViewType(position)
+            when (viewType) {
+                R.layout.vh_product_horizontal_type -> {
+                    Timber.d("ViewHolder-ProductHorizontalTypeViewHolder")
+                }
+
+                R.layout.vh_section_horizontal_type -> {
+                    Timber.d("ViewHolder-SectionHorizontalTypeViewHolder")
+                }
+
+                R.layout.vh_section_grid_type -> {
+                    Timber.d("ViewHolder-SectionGridTypeViewHolder")
+                }
+            }
 
             if (position > 0) {
                 val params = child.layoutParams as RecyclerView.LayoutParams
