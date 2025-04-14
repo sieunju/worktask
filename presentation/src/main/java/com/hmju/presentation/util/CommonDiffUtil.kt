@@ -8,6 +8,7 @@ import com.hmju.presentation.models.ProductVerticalUiModel
 import com.hmju.presentation.models.SectionGridUiModel
 import com.hmju.presentation.models.SectionHorizontalUiModel
 import com.hmju.presentation.models.SectionTitleUiModel
+import com.hmju.presentation.models.VerticalLoadingUiModel
 
 /**
  * Description : RecyclerView DiffUtilClass
@@ -44,6 +45,10 @@ class CommonDiffUtil : DiffUtil.ItemCallback<BaseUiModel>() {
             newItem is SectionTitleUiModel
         ) {
             oldItem.id == newItem.id
+        } else if (oldItem is VerticalLoadingUiModel &&
+            newItem is VerticalLoadingUiModel
+        ) {
+            oldItem.uid == newItem.uid
         } else {
             false
         }
@@ -77,6 +82,10 @@ class CommonDiffUtil : DiffUtil.ItemCallback<BaseUiModel>() {
             newItem is SectionTitleUiModel
         ) {
             oldItem.id == newItem.id
+        } else if (oldItem is VerticalLoadingUiModel &&
+            newItem is VerticalLoadingUiModel
+        ) {
+            oldItem.uid == newItem.uid
         } else {
             false
         }

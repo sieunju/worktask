@@ -14,6 +14,7 @@ import com.hmju.presentation.viewholders.ProductHorizontalTypeViewHolder
 import com.hmju.presentation.viewholders.ProductVerticalTypeViewHolder
 import com.hmju.presentation.viewholders.SectionGridTypeViewHolder
 import com.hmju.presentation.viewholders.SectionHorizontalTypeViewHolder
+import com.hmju.presentation.viewholders.VerticalLoadingViewHolder
 
 /**
  * Description : 공통 ItemListAdapter
@@ -72,6 +73,7 @@ class ItemListAdapter : ListAdapter<BaseUiModel, BaseViewHolder<*>>(
             )
 
             R.layout.vh_section_title_type -> MainSectionTitleViewHolder(parent)
+            R.layout.vh_vertical_loading -> VerticalLoadingViewHolder(parent)
 
             else -> throw IllegalArgumentException("Invalid ViewType:${viewType}")
         }

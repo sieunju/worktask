@@ -9,6 +9,7 @@ import com.hmju.domain.params.SectionParams
 import com.hmju.domain.usecase.MainSectionUseCase
 import com.hmju.presentation.models.BaseUiModel
 import com.hmju.presentation.models.PagingModel
+import com.hmju.presentation.models.VerticalLoadingUiModel
 import com.hmju.presentation.util.ListLiveData
 import com.hmju.presentation.util.UiMapper.toUiModels
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,6 +45,7 @@ class MainViewModel @Inject constructor(
 
     fun onLoadPage() {
         pagingModel.isLoading = true
+        _uiList.add(VerticalLoadingUiModel())
         reqData()
     }
 
@@ -60,6 +62,9 @@ class MainViewModel @Inject constructor(
         _uiState.value = newState
         when (newState) {
             is MainSectionState.Content -> {
+                if (uiList.value.lastOrNull() is VerticalLoadingUiModel) {
+                    _uiList.removeAt(uiList.value.lastIndex)
+                }
                 _uiList.addAll(newState.list.map { it.toUiModels() }.flatten())
                 params.pageNo++
                 pagingModel.isLoading = false
