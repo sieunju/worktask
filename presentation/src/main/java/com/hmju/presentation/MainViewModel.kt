@@ -9,10 +9,12 @@ import com.hmju.domain.params.SectionParams
 import com.hmju.domain.usecase.MainSectionUseCase
 import com.hmju.presentation.models.BaseUiModel
 import com.hmju.presentation.models.PagingModel
+import com.hmju.presentation.models.VerticalLoadingUiModel
 import com.hmju.presentation.util.ListLiveData
-import com.hmju.presentation.util.UiMapper.toUi
+import com.hmju.presentation.util.UiMapper.toUiModels
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -44,12 +46,14 @@ class MainViewModel @Inject constructor(
 
     fun onLoadPage() {
         pagingModel.isLoading = true
+        _uiList.add(VerticalLoadingUiModel())
         reqData()
     }
 
     private fun reqData() {
         job?.cancel()
         job = useCase(params)
+            .catch { emit(MainSectionState.Error(it.message ?: "잠시 후 다시 이용해 주세요.")) }
             .onEach { handleUiState(it) }
             .launchIn(viewModelScope)
     }
@@ -58,20 +62,23 @@ class MainViewModel @Inject constructor(
         newState: MainSectionState
     ) {
         _uiState.value = newState
+        removeLoadingUiModel()
         when (newState) {
-
             is MainSectionState.Content -> {
-                _uiList.addAll(newState.list.map { it.toUi() })
+                _uiList.addAll(newState.list.map { it.toUiModels() }.flatten())
                 params.pageNo++
                 pagingModel.isLoading = false
                 pagingModel.isLast = !newState.hasNextPage
             }
 
-            is MainSectionState.Error -> {
-
-            }
-
             else -> Unit
+        }
+    }
+
+    private fun removeLoadingUiModel() {
+        val list = uiList.value
+        if (list.lastOrNull() is VerticalLoadingUiModel) {
+            _uiList.removeAt(list.lastIndex)
         }
     }
 }

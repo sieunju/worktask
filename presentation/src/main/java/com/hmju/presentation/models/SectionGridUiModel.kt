@@ -10,7 +10,6 @@ import com.hmju.presentation.R
  */
 data class SectionGridUiModel(
     val id: Int,
-    val title: String,
     val uiList: List<BaseUiModel>
 ) : BaseUiModel(R.layout.vh_section_grid_type) {
 
@@ -18,7 +17,6 @@ data class SectionGridUiModel(
         data: SectionWithProductData
     ) : this(
         id = data.id,
-        title = data.title,
         uiList = data.list.map { ProductGridUiModel(it) }
     )
 }

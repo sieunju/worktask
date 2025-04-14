@@ -2,24 +2,26 @@ package com.hmju.presentation.decorations
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hmju.presentation.R
 
+/**
+ * Description : RecyclerView ItemDecoration
+ * @param visibleViewTypes Line 을 표시할 ViewHolder ViewType들
+ * Created by juhongmin on 2025. 4. 14.
+ */
 class VerticalLineDecoration(
-    context: Context
-) : RecyclerView.ItemDecoration(){
+    context: Context,
+    private val visibleViewTypes: Set<Int>
+) : RecyclerView.ItemDecoration() {
 
-    private val paint = Paint().apply {
-        color = ContextCompat.getColor(context, R.color.grey)
-        style = Paint.Style.STROKE
-        strokeWidth = 1f
+    private val divider: Drawable? by lazy {
+        ContextCompat.getDrawable(context, R.drawable.vertical_line_divider)
     }
-
-    private val dividerHeight = context.resources.displayMetrics.density.toInt()
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -28,10 +30,13 @@ class VerticalLineDecoration(
         state: RecyclerView.State
     ) {
         val position = parent.getChildAdapterPosition(view)
+        if (position == RecyclerView.NO_POSITION) return
+        val viewType = parent.adapter?.getItemViewType(position) ?: return
 
-        // 첫 번째 아이템이 아닌 경우에만 상단 여백 추가
-        if (position > 0) {
-            outRect.top = dividerHeight
+        if (visibleViewTypes.contains(viewType) && position > 0) {
+            outRect.top = divider?.intrinsicHeight ?: 0
+        } else {
+            outRect.setEmpty()
         }
     }
 
@@ -46,18 +51,17 @@ class VerticalLineDecoration(
         for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(child)
+            if (position == RecyclerView.NO_POSITION) continue
+            val viewType = parent.adapter?.getItemViewType(position) ?: continue
 
-            if (position > 0) {
+            if (visibleViewTypes.contains(viewType) && position > 0) {
                 val params = child.layoutParams as RecyclerView.LayoutParams
-                val top = child.top - params.topMargin - dividerHeight
-
-                canvas.drawRect(
-                    left.toFloat(),
-                    top.toFloat(),
-                    right.toFloat(),
-                    (top + dividerHeight).toFloat(),
-                    paint
-                )
+                val top = child.top + params.bottomMargin
+                val bottom = top + (divider?.intrinsicHeight ?: 0)
+                divider?.let {
+                    it.setBounds(left, top, right, bottom)
+                    it.draw(canvas)
+                }
             }
         }
     }

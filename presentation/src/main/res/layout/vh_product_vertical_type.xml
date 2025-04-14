@@ -18,7 +18,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivThumb"
@@ -59,7 +60,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:paddingHorizontal="6dp"
             android:text="@{model.name}"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/ivThumb"
@@ -70,7 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:paddingHorizontal="6dp"
             android:paddingTop="6dp"
             app:layout_constraintTop_toBottomOf="@+id/tvName">
 
@@ -86,7 +85,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
+                android:paddingHorizontal="4dp"
                 android:text="@{String.format(@string/fmt_price,model.discountPrice)}"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -97,8 +96,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="6dp"
-                android:paddingTop="2dp"
                 android:text="@{String.format(@string/fmt_price,model.price)}"
                 app:discountPrice="@{model.discountPrice}"
                 app:price="@{model.price}"

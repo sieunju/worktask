@@ -31,13 +31,10 @@
                 android:id="@+id/rvContents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
                 android:focusable="false"
-                android:nestedScrollingEnabled="true"
-                android:paddingBottom="60dp"
-                android:scrollbars="vertical"
                 android:splitMotionEvents="false"
                 app:dataList="@{vm.uiList}"
+                android:visibility="@{vm.uiState instanceof MainSectionState.Content ? View.VISIBLE : View.GONE,default=gone}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onLoadNextPage="@{()-> vm.onLoadPage()}"
                 app:pagingModel="@{vm.pagingModel}"
@@ -51,10 +48,10 @@
                 android:visibility="@{vm.uiState instanceof MainSectionState.Loading ? View.VISIBLE : View.GONE,default=gone}"
                 tools:visibility="visible">
 
-                <androidx.core.widget.ContentLoadingProgressBar
-                    style="?android:attr/progressBarStyleLarge"
+                <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:indeterminate="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"

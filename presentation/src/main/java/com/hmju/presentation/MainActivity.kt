@@ -31,8 +31,14 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             reqManager = Glide.with(this@MainActivity)
             vm = viewModel
-            rvContents.addItemDecoration(VerticalLineDecoration(this@MainActivity))
         }
+
+        binding.rvContents.addItemDecoration(
+            VerticalLineDecoration(
+                this,
+                setOf(R.layout.vh_section_title_type)
+            )
+        )
 
         with(viewModel) {
             uiState.observe(this@MainActivity) {

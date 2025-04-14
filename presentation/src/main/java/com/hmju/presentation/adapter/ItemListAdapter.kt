@@ -8,12 +8,13 @@ import com.hmju.presentation.R
 import com.hmju.presentation.models.BaseUiModel
 import com.hmju.presentation.util.CommonDiffUtil
 import com.hmju.presentation.viewholders.BaseViewHolder
+import com.hmju.presentation.viewholders.MainSectionTitleViewHolder
 import com.hmju.presentation.viewholders.ProductGridTypeViewHolder
 import com.hmju.presentation.viewholders.ProductHorizontalTypeViewHolder
 import com.hmju.presentation.viewholders.ProductVerticalTypeViewHolder
 import com.hmju.presentation.viewholders.SectionGridTypeViewHolder
 import com.hmju.presentation.viewholders.SectionHorizontalTypeViewHolder
-import com.hmju.presentation.viewholders.SectionVerticalTypeViewHolder
+import com.hmju.presentation.viewholders.VerticalLoadingViewHolder
 
 /**
  * Description : 공통 ItemListAdapter
@@ -71,11 +72,8 @@ class ItemListAdapter : ListAdapter<BaseUiModel, BaseViewHolder<*>>(
                 viewModel
             )
 
-            R.layout.vh_section_vertical_type -> SectionVerticalTypeViewHolder(
-                parent,
-                reqManager,
-                viewModel
-            )
+            R.layout.vh_section_title_type -> MainSectionTitleViewHolder(parent)
+            R.layout.vh_vertical_loading -> VerticalLoadingViewHolder(parent)
 
             else -> throw IllegalArgumentException("Invalid ViewType:${viewType}")
         }
