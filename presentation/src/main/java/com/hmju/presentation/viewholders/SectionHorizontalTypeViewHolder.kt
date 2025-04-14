@@ -2,6 +2,7 @@ package com.hmju.presentation.viewholders
 
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.hmju.presentation.R
@@ -23,7 +24,7 @@ class SectionHorizontalTypeViewHolder(
     R.layout.vh_section_horizontal_type
 ) {
 
-    private val decoration: HorizontalSpaceDecoration by lazy {
+    private val decoration: RecyclerView.ItemDecoration by lazy {
         HorizontalSpaceDecoration(parent.context, 16)
     }
 
