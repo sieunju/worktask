@@ -34,6 +34,7 @@
                 android:focusable="false"
                 android:splitMotionEvents="false"
                 app:dataList="@{vm.uiList}"
+                android:visibility="@{vm.uiState instanceof MainSectionState.Content ? View.VISIBLE : View.GONE,default=gone}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onLoadNextPage="@{()-> vm.onLoadPage()}"
                 app:pagingModel="@{vm.pagingModel}"
