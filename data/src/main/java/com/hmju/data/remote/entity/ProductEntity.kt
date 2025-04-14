@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class ProductEntity(
     @SerialName("id")
-    val id: Long = 0,
+    val id: Int = 0,
     @SerialName("name")
     val name: String = "",
     @SerialName("image")

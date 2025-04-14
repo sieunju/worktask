@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.hmju.domain.shared.LikeManager
 import com.hmju.presentation.R
 import com.hmju.presentation.models.BaseUiModel
 
@@ -69,11 +70,15 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("isSelected")
-    fun bindIsSelected(
+    @BindingAdapter("isLikeProduct")
+    fun bindLikeProduct(
         iv: AppCompatImageView,
-        isSelected: Boolean? = null
+        id: Int? = null
     ) {
-        iv.isSelected = isSelected ?: false
+        if (id == null) {
+            iv.isSelected = false
+            return
+        }
+        iv.isSelected = LikeManager.isLike(id)
     }
 }

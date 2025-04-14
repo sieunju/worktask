@@ -9,15 +9,14 @@ import com.hmju.presentation.R
  * Created by juhongmin on 2025. 4. 13.
  */
 data class ProductHorizontalUiModel(
-    val id: Long,
+    val id: Int,
     val name: String,
     val imageUrl: String,
     val price: Int,
     val discountRate: Int,
     val discountPrice: Int? = null,
     val isSoldOut: Boolean,
-    val isDiscount: Boolean,
-    var isLike: Boolean = false
+    val isDiscount: Boolean
 ) : BaseUiModel(R.layout.vh_product_horizontal_type) {
 
     constructor(
@@ -30,7 +29,6 @@ data class ProductHorizontalUiModel(
         discountRate = data.discountRate,
         discountPrice = data.discountPrice,
         isSoldOut = data.isSoldOut,
-        isDiscount = data.isDiscount,
-        isLike = false
+        isDiscount = data.isDiscount
     )
 }

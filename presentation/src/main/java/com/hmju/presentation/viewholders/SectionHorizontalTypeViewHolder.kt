@@ -29,6 +29,7 @@ class SectionHorizontalTypeViewHolder(
 
     init {
         binding.reqManager = reqManager ?: Glide.with(itemView)
+        binding.vm = viewModel
         binding.rvContents.addItemDecoration(decoration)
     }
 

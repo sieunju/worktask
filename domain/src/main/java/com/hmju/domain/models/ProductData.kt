@@ -1,7 +1,7 @@
 package com.hmju.domain.models
 
 data class ProductData(
-    val id: Long,
+    val id: Int,
     val name: String,
     val imageUrl: String,
     val price: Int,
@@ -9,5 +9,5 @@ data class ProductData(
     val discountRate: Int,
     val isSoldOut: Boolean
 ) {
-    val isDiscount get() = discountRate > 0
+    val isDiscount = discountRate > 0
 }
