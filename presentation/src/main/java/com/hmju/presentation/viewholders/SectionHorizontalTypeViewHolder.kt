@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.hmju.presentation.R
 import com.hmju.presentation.databinding.VhSectionHorizontalTypeBinding
+import com.hmju.presentation.decorations.HorizontalSpaceDecoration
 import com.hmju.presentation.models.SectionHorizontalUiModel
 
 /**
@@ -21,8 +22,14 @@ class SectionHorizontalTypeViewHolder(
     parent,
     R.layout.vh_section_horizontal_type
 ) {
+
+    private val decoration: HorizontalSpaceDecoration by lazy {
+        HorizontalSpaceDecoration(parent.context, 16)
+    }
+
     init {
         binding.reqManager = reqManager ?: Glide.with(itemView)
+        binding.rvContents.addItemDecoration(decoration)
     }
 
     override fun onBindView(model: Any) {
