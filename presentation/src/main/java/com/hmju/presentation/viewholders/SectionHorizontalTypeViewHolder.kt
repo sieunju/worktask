@@ -1,5 +1,6 @@
 package com.hmju.presentation.viewholders
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,13 @@ class SectionHorizontalTypeViewHolder(
         binding.reqManager = reqManager ?: Glide.with(itemView)
         binding.vm = viewModel
         binding.rvContents.addItemDecoration(decoration)
+        binding.iExampleDummy.post {
+            val height = binding.iExampleDummy.height
+            if (height > 0) {
+                binding.rvContents.minimumHeight = height
+                binding.iExampleDummy.visibility = View.GONE
+            }
+        }
     }
 
     override fun onBindView(model: Any) {

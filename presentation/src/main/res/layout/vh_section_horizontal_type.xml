@@ -17,10 +17,17 @@
             type="com.hmju.presentation.models.SectionHorizontalUiModel" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/iExampleDummy"
+            layout="@layout/i_product_horizontal_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContents"
@@ -33,13 +40,16 @@
             android:splitMotionEvents="false"
             app:dataList="@{model.uiList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
             app:reqManager="@{reqManager}"
             app:viewModel="@{vm}" />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvContents" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
