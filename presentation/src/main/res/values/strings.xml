@@ -4,6 +4,7 @@
     <string name="txt_sold_out">Coming Soon</string>
     <string name="fmt_price_rate">%d%%</string>
     <string name="fmt_price">%,d원</string>
-    <string name="txt_confirm">확인</string>
+    <string name="txt_retry">재시도</string>
+    <string name="txt_close">닫기</string>
 
 </resources>

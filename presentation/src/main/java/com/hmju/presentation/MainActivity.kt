@@ -54,7 +54,10 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setMessage(state.message)
             .setCancelable(false)
-            .setPositiveButton(R.string.txt_confirm, { _, _ ->
+            .setNegativeButton(R.string.txt_close) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(R.string.txt_retry, { _, _ ->
                 viewModel.start()
             })
             .show()
