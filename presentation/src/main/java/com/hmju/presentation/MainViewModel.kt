@@ -17,7 +17,6 @@ import com.hmju.presentation.models.VerticalLoadingUiModel
 import com.hmju.presentation.util.ListLiveData
 import com.hmju.presentation.util.UiMapper.toUiModels
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -44,7 +43,6 @@ class MainViewModel @Inject constructor(
     val pagingModel: PagingModel by lazy { PagingModel() }
     private val _uiList: ListLiveData<BaseUiModel> by lazy { ListLiveData() }
     val uiList: ListLiveData<BaseUiModel> get() = _uiList
-    private var job: Job? = null
 
     fun start() {
         _uiList.clear()
@@ -60,19 +58,13 @@ class MainViewModel @Inject constructor(
     }
 
     private fun reqData() {
-        job?.cancel()
-        job = if (params.pageNo == 1) {
-            combine(useCase(params), likeUseCase()) { state, _ ->
-                state
-            }.catch { emit(MainSectionState.Error(it.message ?: "잠시 후 다시 이용해 주세요.")) }
-                .onEach { handleUiState(it) }
-                .launchIn(viewModelScope)
+        if (params.pageNo == 1) {
+            combine(useCase(params), likeUseCase()) { state, _ -> state }
         } else {
             useCase(params)
-                .catch { emit(MainSectionState.Error(it.message ?: "잠시 후 다시 이용해 주세요.")) }
-                .onEach { handleUiState(it) }
-                .launchIn(viewModelScope)
-        }
+        }.catch { emit(MainSectionState.Error(it.message ?: "잠시 후 다시 이용해 주세요.")) }
+            .onEach { handleUiState(it) }
+            .launchIn(viewModelScope)
     }
 
     private fun handleUiState(
